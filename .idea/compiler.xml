@@ -7,10 +7,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="config-server" />
         <module name="cloud-parent" />
         <module name="eureka-client" />
-        <module name="eureka-server" />
         <module name="consul-client" />
+        <module name="config-client" />
+        <module name="eureka-server" />
         <module name="eureka-consumer" />
       </profile>
     </annotationProcessing>
@@ -20,6 +22,8 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="config-client" options="-parameters" />
+      <module name="config-server" options="-parameters" />
       <module name="consul-client" options="-parameters" />
       <module name="eureka-client" options="-parameters" />
       <module name="eureka-comsumer" options="-parameters" />
