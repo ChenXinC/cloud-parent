@@ -1,5 +1,6 @@
 package com.example.eureka.consumer.controller;
 
+import com.example.eureka.consumer.feign.DemoFeignClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
@@ -20,10 +21,18 @@ public class ConsumerController {
     @Autowired
     private RestTemplate restTemplate;
 
+    @Autowired
+    private DemoFeignClient demoFeignClient;
+
     @GetMapping("/client")
     public String getClient() {
         ServiceInstance serviceInstance = loadBalancerClient.choose("eureka-client");
         String url = "http://" + serviceInstance.getHost() + ":" + serviceInstance.getPort() + "/demo/service";
         return restTemplate.getForObject(url, String.class);
+    }
+
+    @GetMapping("/feign")
+    public String getClientWithFeign() {
+        return demoFeignClient.consumer();
     }
 }
