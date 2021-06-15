@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.locks.ReentrantLock;
+
 @RestController
 @RequestMapping("/demo")
 @Slf4j
@@ -20,5 +23,15 @@ public class DemoController {
         String services = "Services: " + discoveryClient.getServices();
         log.info("services:{}", services);
         return services;
+    }
+
+    @GetMapping("/fallback")
+    public String fallback() {
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return "success";
     }
 }

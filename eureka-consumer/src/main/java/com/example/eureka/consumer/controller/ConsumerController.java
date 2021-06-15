@@ -35,4 +35,9 @@ public class ConsumerController {
     public String getClientWithFeign() {
         return demoFeignClient.consumer();
     }
+
+    @GetMapping("/fallback")
+    public String fallback() {
+        return demoFeignClient.fallback();
+    }
 }
